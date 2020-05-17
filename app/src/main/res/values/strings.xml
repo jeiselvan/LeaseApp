@@ -1,10 +1,23 @@
 <resources>
     <string name="app_name">LeaseApp</string>
+
+    <!--   Views Related   -->
     <string name="leaseinfo">LeaseInfo</string>
     <string name="know_your_lease_info">Know your lease info</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="recent_leases">Recent Leases</string>
-    <string name="error_no_internet">Intenet not available</string>
+    <string name="start_date">Start date</string>
+    <string name="payment_day">Payment days</string>
+    <string name="frequency">Frequency</string>
+    <string name="rent">Rent</string>
+    <string name="end_date">End date</string>
+    <string name="loading">loading…</string>
+
+    <!--Error Messages-->
+    <string name="error_no_internet">Internet not available</string>
+    <string name="server_error">Something went wrong, Please try again later</string>
+
+    <!--  Content Descriptions  -->
+    <string name="lease_home_image">lease home image</string>
+    <string name="lease_list_data_image">Lease list data image</string>
+    <string name="next_arrow">Next arrow</string>
 </resources>

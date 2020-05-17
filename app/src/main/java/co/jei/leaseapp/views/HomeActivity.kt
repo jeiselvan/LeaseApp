@@ -1,7 +1,7 @@
 package co.jei.leaseapp.views
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import co.jei.leaseapp.R
 
 class HomeActivity : AppCompatActivity() {

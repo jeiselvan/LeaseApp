@@ -53,14 +53,21 @@ class HomeFragment : Fragment() {
         leaseViewModel = ViewModelProviders.of(this).get(LeaseViewModel::class.java)
 
         leaseViewModel.leaseList.observe(requireActivity(), Observer { list ->
+            layout_progress.visibility = View.GONE
             list?.let {
                 leaseListAdapter.updateLeaseList(it)
             }
+        })
+
+        leaseViewModel.isLeaseListError.observe(requireActivity(), Observer { error ->
+            layout_progress.visibility = View.GONE
+            CommonUtils.showToast(requireContext(), getString(R.string.server_error))
         })
     }
 
     private fun getLeaseList() {
         if (CommonUtils.isNetworkAvailable(requireContext())) {
+            layout_progress.visibility = View.VISIBLE
             leaseViewModel.getLeaseList()
         } else {
             CommonUtils.showToast(requireContext(), getString(R.string.error_no_internet))

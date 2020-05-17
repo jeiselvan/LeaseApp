@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_lease_data.view.*
 
 class LeaseListAdapter(
     private val activity: Activity,
-    private val leaseList: ArrayList<LeaseList>, var listener: (LeaseList) -> Unit
+    private val leaseList: ArrayList<LeaseList>, private var listener: (LeaseList) -> Unit
 ) : RecyclerView.Adapter<LeaseListAdapter.LeaseListViewHolder>() {
 
     fun updateLeaseList(updatedLeaseList: List<LeaseList>) {

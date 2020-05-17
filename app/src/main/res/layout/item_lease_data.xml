@@ -17,6 +17,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerInParent="true"
+            android:contentDescription="@string/lease_list_data_image"
             android:src="@drawable/ic_lease_data" />
 
     </RelativeLayout>
@@ -25,8 +26,10 @@
         android:id="@+id/txt_tenant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/img_next"
         android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
+        android:layout_marginEnd="16dp"
         android:layout_toEndOf="@+id/rl_image"
         android:fontFamily="@font/montserrat"
         android:text=""
@@ -34,11 +37,13 @@
         android:textSize="16sp" />
 
     <ImageView
+        android:id="@+id/img_next"
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="16dp"
+        android:contentDescription="@string/next_arrow"
         android:src="@drawable/ic_next" />
 
     <View

@@ -17,7 +17,7 @@ class LeaseApp : Application() {
         appComponent = buildComponent()
     }
 
-    protected fun buildComponent(): AppComponent {
+    private fun buildComponent(): AppComponent {
         return DaggerAppComponent.builder()
             .appModule(AppModule(this))
             .build()

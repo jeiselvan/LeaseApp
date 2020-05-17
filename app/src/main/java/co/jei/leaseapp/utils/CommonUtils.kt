@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.widget.Toast
 
 class CommonUtils {
 
@@ -24,6 +25,10 @@ class CommonUtils {
                 val nwInfo = connectivityManager.activeNetworkInfo ?: return false
                 return nwInfo.isConnected
             }
+        }
+
+        fun showToast(context: Context, message: String) {
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         }
     }
 }

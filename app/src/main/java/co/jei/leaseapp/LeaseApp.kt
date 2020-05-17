@@ -3,6 +3,7 @@ package co.jei.leaseapp
 import android.app.Application
 import android.content.Context
 import co.jei.leaseapp.di.AppComponent
+import co.jei.leaseapp.di.AppModule
 import co.jei.leaseapp.di.DaggerAppComponent
 
 class LeaseApp : Application() {
@@ -18,6 +19,7 @@ class LeaseApp : Application() {
 
     protected fun buildComponent(): AppComponent {
         return DaggerAppComponent.builder()
+            .appModule(AppModule(this))
             .build()
     }
 }

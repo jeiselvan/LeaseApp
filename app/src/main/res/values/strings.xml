@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">LeaseApp</string>
+    <string name="leaseinfo">LeaseInfo</string>
+    <string name="know_your_lease_info">Know your lease info</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="recent_leases">Recent Leases</string>
+    <string name="error_no_internet">Intenet not available</string>
 </resources>

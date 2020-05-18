@@ -18,8 +18,11 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-open class NetworkModule {
+class NetworkModule {
 
+    /**
+     * Provides the Lease API
+     */
     @Provides
     @Singleton
     open fun providesLeaseAPI(context: Context): LeaseAPI {
@@ -32,32 +35,44 @@ open class NetworkModule {
             .create(LeaseAPI::class.java)
     }
 
+    /**
+     * Provides the Lease Service
+     */
     @Provides
     @Singleton
-    open fun provideLeaseService(): LeaseService {
+    fun provideLeaseService(): LeaseService {
         return LeaseService()
     }
 
+    /**
+     *  Logging interceptor implementation
+     */
     @Provides
     @Singleton
-    open fun getLoggingInterceptor(): HttpLoggingInterceptor {
+    fun getLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         return interceptor
     }
 
+    /**
+     * Cache your responses if needed.
+     */
     @Provides
     @Singleton
-    open fun getCache(context: Context): Cache {
+    fun getCache(context: Context): Cache {
         return Cache(
             File(context.cacheDir, "okhttp_cache_lease"),
             (10 * 1024 * 1024).toLong()
         )
     }
 
+    /**
+     * The Okhttp client implementation
+     */
     @Provides
     @Singleton
-    open fun getHttpClient(appContext: Context): OkHttpClient {
+    fun getHttpClient(appContext: Context): OkHttpClient {
         return OkHttpClient.Builder()
             .connectTimeout(40, TimeUnit.SECONDS)
             .writeTimeout(40, TimeUnit.SECONDS)
@@ -67,9 +82,12 @@ open class NetworkModule {
             .build()
     }
 
+    /**
+     * Disposables to clear the network calls
+     */
     @Provides
     @Singleton
-    open fun provideDisposable(): CompositeDisposable {
+    fun provideDisposable(): CompositeDisposable {
         return CompositeDisposable()
     }
 }

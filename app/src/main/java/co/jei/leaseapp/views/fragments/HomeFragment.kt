@@ -36,6 +36,9 @@ class HomeFragment : Fragment() {
         getLeaseList()
     }
 
+    /**
+     * Views initialization
+     */
     private fun initViews() {
         leaseListAdapter = LeaseListAdapter(requireActivity(), arrayListOf()) { info ->
             val infoIntent = Intent(requireActivity(), LeaseInfoActivity::class.java)
@@ -49,6 +52,9 @@ class HomeFragment : Fragment() {
         }
     }
 
+    /**
+     * Observe leaseViewModel and update the UI according to web service responses
+     */
     private fun observeViewModel() {
         leaseViewModel = ViewModelProviders.of(this).get(LeaseViewModel::class.java)
 
@@ -65,6 +71,9 @@ class HomeFragment : Fragment() {
         })
     }
 
+    /**
+     * Get LeaseList info
+     */
     private fun getLeaseList() {
         if (CommonUtils.isNetworkAvailable(requireContext())) {
             layout_progress.visibility = View.VISIBLE

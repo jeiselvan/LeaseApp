@@ -10,6 +10,9 @@ class CommonUtils {
 
     companion object {
 
+        /**
+         * Check Internet availability
+         */
         fun isNetworkAvailable(context: Context): Boolean {
             val connectivityManager =
                 context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -27,6 +30,9 @@ class CommonUtils {
             }
         }
 
+        /**
+         * Show Toast message to the user
+         */
         fun showToast(context: Context, message: String) {
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         }

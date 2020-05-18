@@ -1,6 +1,5 @@
 package co.jei.leaseapp.viewmodels
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import co.jei.leaseapp.LeaseApp
@@ -31,6 +30,9 @@ class LeaseViewModel : ViewModel() {
     val isLeaseInfoError = MutableLiveData<Boolean>()
     val leaseInfo = MutableLiveData<LeaseInfo>()
 
+    /**
+     * Get Lease List from the api
+     */
     fun getLeaseList() {
         disposable.add(
             leaseService.getLeaseList().subscribeOn(Schedulers.newThread())
@@ -47,6 +49,9 @@ class LeaseViewModel : ViewModel() {
         )
     }
 
+    /**
+     * Get Lease info by sending the lease id
+     */
     fun getLeaseInfo(id: String) {
         disposable.add(
             leaseService.getLeaseInfo(id).subscribeOn(Schedulers.newThread())
@@ -61,22 +66,6 @@ class LeaseViewModel : ViewModel() {
                     }
                 })
         )
-    }
-
-    fun getLeaseListData(): LiveData<List<LeaseList>> {
-        return leaseList
-    }
-
-    fun getLeaseInfoData(): LiveData<LeaseInfo> {
-        return leaseInfo
-    }
-
-    fun getLeaseListError(): LiveData<Boolean> {
-        return isLeaseListError
-    }
-
-    fun getLeaseInfoError(): LiveData<Boolean> {
-        return isLeaseInfoError
     }
 
     override fun onCleared() {

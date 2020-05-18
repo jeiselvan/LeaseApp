@@ -27,6 +27,9 @@ class LeaseInfoActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Set LeaseInfo Data
+     */
     @SuppressLint("SetTextI18n")
     private fun setLeaseInfo(leaseInfo: LeaseInfo) {
         txt_start_date.text = leaseInfo.startDate
@@ -36,6 +39,9 @@ class LeaseInfoActivity : AppCompatActivity() {
         txt_payment_day.text = leaseInfo.payment_day
     }
 
+    /**
+     * Observe leaseViewModel and update the UI according to web service responses
+     */
     private fun observeViewModel() {
         leaseViewModel = ViewModelProviders.of(this).get(LeaseViewModel::class.java)
 
@@ -52,6 +58,9 @@ class LeaseInfoActivity : AppCompatActivity() {
         })
     }
 
+    /**
+     * Get LeaseInfo by sending the Lease ID
+     */
     private fun getLeaseInfo(id: String) {
         if (CommonUtils.isNetworkAvailable(this@LeaseInfoActivity)) {
             layout_progress.visibility = View.VISIBLE

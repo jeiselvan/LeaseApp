@@ -26,5 +26,6 @@ Testing
 --------
 Unit tests are conducted for the webservices which are implemented in this app. The testing frameworks which were used :- Mockito, Mockk and JUnit Framework.
 Please run the test a second time if it fails the first time due to the fact that in some instances "RxImmediateSchedulerRule" Rule is not getting initialized. This error is common when RxJava functions are involved.
+This app is tested in Google Pixel 5 emulator.
 
 

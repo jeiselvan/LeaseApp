@@ -1,9 +1,9 @@
 package co.jei.leaseapp.di
 
 import android.content.Context
-import co.jei.leaseapp.BuildConfig.BASE_URL
-import co.jei.leaseapp.network.LeaseAPI
-import co.jei.leaseapp.network.LeaseService
+import co.jei.leaseapp.BuildConfig
+import co.jei.leaseapp.network.LeaseTestAPI
+import co.jei.leaseapp.network.LeaseTestService
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
@@ -18,29 +18,29 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-open class NetworkModule {
+class TestNetworkModule {
 
     @Provides
     @Singleton
-    open fun providesLeaseAPI(context: Context): LeaseAPI {
+    fun providesLeaseAPI(context: Context): LeaseTestAPI {
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BuildConfig.BASE_URL)
             .client(getHttpClient(context))
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
-            .create(LeaseAPI::class.java)
+            .create(LeaseTestAPI::class.java)
     }
 
     @Provides
     @Singleton
-    open fun provideLeaseService(): LeaseService {
-        return LeaseService()
+    fun provideLeaseTestService(): LeaseTestService {
+        return LeaseTestService()
     }
 
     @Provides
     @Singleton
-    open fun getLoggingInterceptor(): HttpLoggingInterceptor {
+    fun getLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         return interceptor
@@ -48,7 +48,7 @@ open class NetworkModule {
 
     @Provides
     @Singleton
-    open fun getCache(context: Context): Cache {
+    fun getCache(context: Context): Cache {
         return Cache(
             File(context.cacheDir, "okhttp_cache_lease"),
             (10 * 1024 * 1024).toLong()
@@ -57,19 +57,19 @@ open class NetworkModule {
 
     @Provides
     @Singleton
-    open fun getHttpClient(appContext: Context): OkHttpClient {
+    fun getHttpClient(appContext: Context): OkHttpClient {
         return OkHttpClient.Builder()
             .connectTimeout(40, TimeUnit.SECONDS)
             .writeTimeout(40, TimeUnit.SECONDS)
             .readTimeout(40, TimeUnit.SECONDS)
             .addInterceptor(getLoggingInterceptor())
-            .cache(null)
+            .cache(getCache(appContext))
             .build()
     }
 
     @Provides
     @Singleton
-    open fun provideDisposable(): CompositeDisposable {
+    fun provideDisposable(): CompositeDisposable {
         return CompositeDisposable()
     }
 }

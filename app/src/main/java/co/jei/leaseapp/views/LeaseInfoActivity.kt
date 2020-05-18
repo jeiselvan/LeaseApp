@@ -23,7 +23,7 @@ class LeaseInfoActivity : AppCompatActivity() {
         if (intent.extras != null) {
             val id = intent.getStringExtra("id")
             observeViewModel()
-            getLeaseInfo(id)
+            getLeaseInfo(id!!)
         }
     }
 
@@ -46,7 +46,7 @@ class LeaseInfoActivity : AppCompatActivity() {
             }
         })
 
-        leaseViewModel.isLeaseInfoError.observe(this, Observer { error ->
+        leaseViewModel.isLeaseInfoError.observe(this, Observer { _ ->
             layout_progress.visibility = View.GONE
             CommonUtils.showToast(this, getString(R.string.server_error))
         })

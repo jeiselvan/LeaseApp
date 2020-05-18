@@ -59,7 +59,7 @@ class HomeFragment : Fragment() {
             }
         })
 
-        leaseViewModel.isLeaseListError.observe(requireActivity(), Observer { error ->
+        leaseViewModel.isLeaseListError.observe(requireActivity(), Observer { _ ->
             layout_progress.visibility = View.GONE
             CommonUtils.showToast(requireContext(), getString(R.string.server_error))
         })

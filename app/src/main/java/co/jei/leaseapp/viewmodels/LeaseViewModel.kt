@@ -1,5 +1,6 @@
 package co.jei.leaseapp.viewmodels
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import co.jei.leaseapp.LeaseApp
@@ -12,17 +13,18 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
+
 class LeaseViewModel : ViewModel() {
+
+    init {
+        LeaseApp.appComponent.inject(this)
+    }
 
     @Inject
     lateinit var leaseService: LeaseService
 
     @Inject
     lateinit var disposable: CompositeDisposable
-
-    init {
-        LeaseApp.appComponent.inject(this)
-    }
 
     val isLeaseListError = MutableLiveData<Boolean>()
     val leaseList = MutableLiveData<List<LeaseList>>()
@@ -59,5 +61,26 @@ class LeaseViewModel : ViewModel() {
                     }
                 })
         )
+    }
+
+    fun getLeaseListData(): LiveData<List<LeaseList>> {
+        return leaseList
+    }
+
+    fun getLeaseInfoData(): LiveData<LeaseInfo> {
+        return leaseInfo
+    }
+
+    fun getLeaseListError(): LiveData<Boolean> {
+        return isLeaseListError
+    }
+
+    fun getLeaseInfoError(): LiveData<Boolean> {
+        return isLeaseInfoError
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        disposable.clear()
     }
 }

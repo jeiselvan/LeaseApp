@@ -5,6 +5,7 @@ import android.content.Context
 import co.jei.leaseapp.di.AppComponent
 import co.jei.leaseapp.di.AppModule
 import co.jei.leaseapp.di.DaggerAppComponent
+import okhttp3.Cache
 
 class LeaseApp : Application() {
 
@@ -12,12 +13,16 @@ class LeaseApp : Application() {
         lateinit var appComponent: AppComponent
     }
 
-    override fun attachBaseContext(base: Context?) {
-        super.attachBaseContext(base)
+    override fun onCreate() {
+        super.onCreate()
         appComponent = buildComponent()
     }
 
-    private fun buildComponent(): AppComponent {
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+    }
+
+     fun buildComponent(): AppComponent {
         return DaggerAppComponent.builder()
             .appModule(AppModule(this))
             .build()

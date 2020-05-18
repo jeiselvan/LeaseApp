@@ -27,6 +27,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    android.applicationVariants.all {
+        def aptOutputDir = new File(buildDir, "generated/source/apt/${it.unitTestVariant.dirName}")
+        it.unitTestVariant.addJavaSourceFoldersToModel(aptOutputDir)
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 ext {
@@ -40,6 +50,7 @@ ext {
     lifeCycleExtensionVersion = '1.1.1'
     circleImageViewVersion = '3.1.0'
     spinKit = '1.4.0'
+    mockito_core_version = '2.28.2'
 }
 
 
@@ -60,20 +71,40 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
 
+    // Dagger2
     implementation "com.google.dagger:dagger:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+    kaptTest "com.google.dagger:dagger-compiler:$daggerVersion"
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$daggerVersion"
 
+    testAnnotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    // ViewModel & LifeCycle
     implementation "android.arch.lifecycle:extensions:$lifeCycleExtensionVersion"
     annotationProcessor "android.arch.lifecycle:compiler:$lifeCycleExtensionVersion"
     implementation "androidx.preference:preference-ktx:1.1.1"
 
+    // UI Libraries
     implementation "de.hdodenhof:circleimageview:$circleImageViewVersion"
     implementation "com.github.ybq:Android-SpinKit:$spinKit"
 
     testImplementation 'junit:junit:4.12'
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+
+    testImplementation 'org.mockito:mockito-core:2.28.2'
+    // required if you want to use Mockito for Android tests
+    androidTestImplementation 'org.mockito:mockito-android:2.28.2'
+
+    testImplementation "io.mockk:mockk:1.9.3"
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.0'
+
 }
